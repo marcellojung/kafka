@@ -1,0 +1,27 @@
+log_file: "/app/logs/consumer.log"
+delete_log_file: "/app/logs/delete.log"
+
+batch_size: 5000
+TABLE_CLEANUP_DAYS: 8
+kafka:
+  bootstrap_servers: ["127.0.0.1:9092", "127.0.0.2:9092", "127.0.0.3:9092", "127.0.0.4:9092"]
+  group_id: "consumer_group"
+  auto_offset_reset: "earliest"
+
+topics:
+  CALCULATED-SAMSUNG-LTE:
+    partitions: 3
+    table: kpi_samsung_lte_raw
+    columns: ['cell_id', 'du_sys_id', 'cdatetime', 'RRC_SUCCRATE', 'rssi', 'x2_in_att', 'x2_in_succ', 'endc_att', 'erab_succ', 'dl_ri', 'reconfig_att', 'rre_att', 'rach_att', 'rrc_succ', 'volte_ul_defect', 'endc_succrate', 'ul_air_mac', 'endc_succ', 'RRC_ATT', 'ul_bler', 'calldrop_att', 'dl_active_ue', 'air_mac', 'dl_bler', 'x2_in_succrate', 'dl_prb', 'rach_succrate', 'calldrop_bunmo', 'ul_prb', 'rre_incidencerate', 'reconfig_succrate', 'erab_succrate', 'reconfig_succ', 'ul_packet_loss', 'dl_air_mac', 'erab_att']
+  CALCULATED-SAMSUNG-5G:
+    partitions: 3
+    table: kpi_samsung_5g_raw
+    columns: ['cell_id', 'du_sys_id', 'cdatetime', 'rach_succrate', 'dl_air_mac', 'ul_air_mac', 'ul_prb_avg', 'dl_bler', 'rssi', 'no_call', 'dl_ri_avg', 'rach_succ', 'rach_att', 'dl_prb_avg', 'ul_bler']
+  
+postgres:
+  host: "127.0.0.1"
+  port: 5432
+  user: "admin"
+  password: "1234"
+  database: "postgres"
+
